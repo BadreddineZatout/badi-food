@@ -26,7 +26,7 @@
                 </div>
                 <ul class="text-sm mt-6 hidden md:block" id="menu">
                     <li class="text-gray-700 font-bold py-1 border-r-4 border-primary">
-                        <a href="#" class="px-4">
+                        <a href="{{route('Home')}}" class="px-4">
                             <span>Home</span>
                             <svg class="w-5 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
