@@ -1,1 +1,3 @@
-require('./bootstrap');
+require("./bootstrap");
+require("./menu");
+require("./recipes");
