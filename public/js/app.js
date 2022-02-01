@@ -2058,13 +2058,16 @@ module.exports = {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menu */ "./resources/js/menu.js");
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_menu__WEBPACK_IMPORTED_MODULE_1__);
 
-__webpack_require__(/*! ./menu */ "./resources/js/menu.js");
 
-__webpack_require__(/*! ./recipes */ "./resources/js/recipes.js");
 
 /***/ }),
 
@@ -2114,26 +2117,6 @@ menuButton.addEventListener("click", function () {
     menu.classList.add("hidden");
   }
 });
-
-/***/ }),
-
-/***/ "./resources/js/recipes.js":
-/*!*********************************!*\
-  !*** ./resources/js/recipes.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var getRecipes = function getRecipes(url) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post(url).then(function (response) {
-    console.log(response.data);
-  });
-};
 
 /***/ }),
 

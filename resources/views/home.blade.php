@@ -80,14 +80,13 @@
             <div>
                 <h4 class="font-bold mt-12 pb-2 border-b border-gray-200">Latest Recipes</h4>
 
-                <div class="mt-8 grid lg:grid-cols-3 gap-10">
+                <div id="cards" class="mt-8 grid lg:grid-cols-3 gap-10">
                     <!-- cards go here -->
                     @foreach ($recipes as $recipe)
                         <div class="card">
-                            <img class="w-full h-32 sm:h-48 object-cover" src="{{ Storage::url($recipe->image) }}"
-                                alt="stew">
+                            <img class="w-full h-32 sm:h-48 object-cover" src="{{ Storage::url($recipe->image) }}">
                             <div class="m-4">
-                                <span class=" font-bold">{{ $recipe->title }}</span>
+                                <span class="font-bold">{{ $recipe->title }}</span>
                                 <span class="block text-gray-500 text-sm">Recipe by {{ $recipe->author }}</span>
                             </div>
                             <div class="badge">
@@ -110,7 +109,7 @@
             </div>
 
             <div class="flex justify-center mt-12">
-                <div id="load-more"
+                <div id="load-more" offset="3"
                     class=" btn bg-secondary-100 text-secondary-200 hover:shadow-inner transform hover:scale-125 hover:bg-opacity-50 transition ease-out duration-300">
                     Load more</div>
             </div>
@@ -125,12 +124,50 @@
 crossorigin="anonymous"></script>
 <script>
     $('#load-more').click(function() {
+        let offset = parseInt($('#load-more').attr('offset'));
         var url = "{{ route('recipes', [':offset', ':limit']) }}";
-        url = url.replace(':offset', 1);
+        url = url.replace(':offset', offset);
         url = url.replace(':limit', 3);
         axios.post(url).then((response) => {
             console.log(response.data);
+            let data = response.data;
+            if (data.length > 0) {
+                addCards(data)
+                offset += 3;
+                $('#load-more').attr('offset', offset);
+                if (data.length < 3) $('#load-more').addClass('hidden');
+            }
         });
 
     });
+
+    const addCards = (recipes) => {
+        for (let recipe of recipes) {
+            let card = $('<div></div>');
+            card.addClass('card');
+            let img = $('<img>');
+            img.attr('src', "/storage/" + recipe.image);
+            img.addClass('w-full h-32 sm:h-48 object-cover');
+            let titleDiv = $('<div></div>');
+            titleDiv.addClass('m-4');
+            let titleSpan = $('<span></span>');
+            titleSpan.addClass('font-bold');
+            titleSpan.text(recipe.title);
+            let authorSpan = $('<span></span>');
+            authorSpan.addClass('block text-gray-500 text-sm');
+            authorSpan.text('Recipe by ' + recipe.author);
+            let badgeDiv = $('<div></div>');
+            badgeDiv.addClass('badge');
+            let badgeSpan = $('<span></span>');
+            badgeSpan.text(recipe.duration + " MINS");
+
+            badgeDiv.append(badgeSpan);
+            titleDiv.append(titleSpan);
+            titleDiv.append(authorSpan);
+            card.append(img);
+            card.append(titleDiv);
+            card.append(badgeDiv);
+            $('#cards').append(card);
+        }
+    }
 </script>
