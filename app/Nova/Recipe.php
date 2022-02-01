@@ -5,8 +5,10 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Recipe extends Resource
@@ -46,8 +48,12 @@ class Recipe extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Title')->sortable(),
             Text::make('Author'),
+            Textarea::make('Instructions'),
             Number::make('Duration')->min(1)->max(120),
-            File::make('image')->disk('public')
+            Image::make('image')->disk('public')
+                ->path("./img")
+                ->disableDownload()
+                ->hideFromIndex()
 
         ];
     }
